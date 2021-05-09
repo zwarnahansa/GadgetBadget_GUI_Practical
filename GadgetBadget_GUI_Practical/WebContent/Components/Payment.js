@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 	$("#alertSuccess").hide();
 	$("#alertError").hide();
-	$("#hidOrderIDSave").val("");
+	$("#hidPaymentIDSave").val("");
 	$("#PAYMENT")[0].reset();
 });
 
