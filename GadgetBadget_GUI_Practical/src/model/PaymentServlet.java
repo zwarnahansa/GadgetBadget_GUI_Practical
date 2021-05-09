@@ -9,7 +9,7 @@ private Connection connect()
  Connection con = null;
  try
  {
- Class.forName("com.mysql.jdbc.Driver");
+ Class.forName("com.mysql.cj.jdbc.Driver");
 
  //Provide the correct details: DBServer/DBName, username, password
  con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test?useTimezone=true&serverTimezone=UTC", "root", "");
@@ -41,15 +41,18 @@ public String insertPayment(String price, String cardType, String name, String c
 // execute the statement
  preparedStmt.execute();
  con.close();
- output = "Inserted successfully";
- }
- catch (Exception e)
- {
- output = "Error while inserting the payment details";
- System.err.println(e.getMessage());
- }
- return output;
- }
+ 
+ String newPayment = readPayments(); 
+ output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}"; 
+} 
+catch (Exception e) 
+{ 
+output = "{\"status\":\"error\", \"data\": \"Error while inserting the payment details.\"}";
+System.err.println(e.getMessage());
+} 
+return output; 
+}
+
 public String readPayments()
  {
  String output = "";
@@ -95,7 +98,7 @@ public String readPayments()
  }
  catch (Exception e)
  {
- output = "Error while reading the items.";
+ output = "Error while reading the payment details.";
  System.err.println(e.getMessage());
  }
  return output;
@@ -122,15 +125,16 @@ public String updatePayment(String ID, String price, String cardType, String nam
 	 // execute the statement
 	 preparedStmt.execute();
 	 con.close();
-	 output = "Updated successfully";
+	 String newPayment = readPayments(); output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}"; 
+	 } 
+	 catch (Exception e) 
+	 { 
+		 output = "{\"status\":\"error\", \"data\": \"Error while updating the payment details.\"}"; 
+		 System.err.println(e.getMessage()); 
+	 } 
+	 	return output; 
 	 }
-	 catch (Exception e)
-	 {
-	 output = "Error while updating the payment details.";
-	 System.err.println(e.getMessage());
-	 }
-	 return output;
-	 }
+
 	public String deletePayment(String paymentID)
 	 {
 	 String output = "";
@@ -147,13 +151,13 @@ public String updatePayment(String ID, String price, String cardType, String nam
 	 // execute the statement
 	 preparedStmt.execute();
 	 con.close();
-	 output = "Deleted successfully";
-	 }
-	 catch (Exception e)
-	 {
-	 output = "Error while deleting the payment.";
-	 System.err.println(e.getMessage());
-	 }
-	 return output;
-	 }
+	 String newPayment = readPayments(); output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}";
+	 } 
+	 catch (Exception e) 
+	 { 
+		 output = "{\"status\":\"error\", \"data\": \"Error while deleting the payment details.\"}"; 
+		 System.err.println(e.getMessage()); 
+	 } 
+	 return output; 
+} 
 	} 

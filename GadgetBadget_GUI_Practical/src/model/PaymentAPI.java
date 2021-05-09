@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class PaymentAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	PaymentServlet orderObj = new PaymentServlet();
+	PaymentServlet paymentObj = new PaymentServlet();
 	
 	public PaymentAPI() {
 		super();
@@ -33,7 +33,7 @@ public class PaymentAPI extends HttpServlet {
 			throws ServletException, IOException {
 		
 		// TODO Auto-generated method stub
-		String outputString = orderObj.insertPayment(request.getParameter("paymentPrice"), 
+		String outputString = paymentObj.insertPayment(request.getParameter("paymentPrice"), 
 				request.getParameter("cardType"),
 				request.getParameter("paymentName"), 
 				request.getParameter("paymentCardNo"), 
@@ -49,7 +49,7 @@ public class PaymentAPI extends HttpServlet {
 		
 		Map paras = getParasMap(request);
 
-		String outputString = orderObj.updatePayment(
+		String outputString = paymentObj.updatePayment(
 				paras.get("paymentID").toString(),
 				paras.get("paymentPrice").toString(),
 				paras.get("cardType").toString(), 
@@ -67,7 +67,7 @@ public class PaymentAPI extends HttpServlet {
 		
 		// TODO Auto-generated method stub
 		Map paras = getParasMap(request);
-		String output = orderObj.deletePayment(paras.get("paymentID").toString());
+		String output = paymentObj.deletePayment(paras.get("paymentID").toString());
 		response.getWriter().write(output); 		
 	}
 
