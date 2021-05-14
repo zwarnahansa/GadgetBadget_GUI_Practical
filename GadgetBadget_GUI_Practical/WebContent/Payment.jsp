@@ -72,10 +72,8 @@
 						    <div class="col">
 						      <div class="form-outline">
 								<label class="form-label" for="form6Example2" class="col-sm-2 col-form-label col-form-label-sm">CVC:</label>
-						        <input type="text" id="paymentCvc" class="form-control" name="paymentCvc" aria-describedby="passwordHelpInline" placeholder="Must be 3 digit number.">
-						        <small id="passwordHelpInline" class="text-muted">
-      								Must be 3 digit number.
-    							</small>
+						        <input type="text" id="paymentCvc" class="form-control" name="paymentCvc" aria-describedby="passwordHelpInline" placeholder="3 digit security code">
+						    
 						      </div>
 						    </div>
 						  </div>						
