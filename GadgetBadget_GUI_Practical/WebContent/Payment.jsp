@@ -16,24 +16,7 @@
 		   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
-     <script type="text/javascript">
-        $(function() {
-            $('.date-picker').datepicker( {
-            changeMonth: true,
-            changeYear: true,
-            showButtonPanel: true,
-            dateFormat: 'MM yy',
-            onClose: function(dateText, inst) { 
-                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-            }
-            });
-        });
-    </script>
-    <style>
-    .ui-datepicker-calendar {
-        display: none;
-    }
-    </style>
+
 
 	</head>
 	
@@ -83,7 +66,7 @@
 						    <div class="col">
 						      <div class="form-outline">
 						        <label class="form-label" for="form6Example1" class="col-sm-2 col-form-label col-form-label-sm">Expire Date:</label>
-						        <input type="" id="startDate"  class="date-picker" name="startDate" placeholder="MM/YY">						        
+						        <input type="" id="startDate"  class="form-control" placeholder="MM.YY" name="startDate">						        
 						      </div>
 						    </div>
 						    <div class="col">
