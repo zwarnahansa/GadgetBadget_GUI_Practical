@@ -24,8 +24,8 @@ $(document).on("click", "#btnSave", function(event) {
 	}
 	
 	// If valid------------------------
-	var type = ($("#hidPaymentIDSave").val() == "") ? "POST" : "PUT";
-
+	var type = ($("#paymentID").val() == "") ? "POST" : "PUT";
+  
 	$.ajax({
 		url : "PaymentAPI",
 		type : type,
@@ -67,7 +67,7 @@ function onItemSaveComplete(response, status) {
 		$("#alertError").show();
 	}
 	
-	$("#hidPaymentIDSave").val("");
+	$("#paymentID").val("");
 	$("#PAYMENT")[0].reset();
 }
 
@@ -76,10 +76,11 @@ $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
 		url : "PaymentAPI",
 		type : "DELETE",
-		data : "paymentID=" + $(this).data("paymentID"),
+		data : "paymentID=" + event.target.value,
 		dataType : "text",
 		complete : function(response, status) {
 			onItemDeleteComplete(response.responseText, status);
+			window.location.reload(true);
 		}
 	});
 });
@@ -117,13 +118,13 @@ function onItemDeleteComplete(response, status) {
 // UPDATE==========================================
 $(document).on("click",".btnUpdate",function(event)
 		{
-			$("#hidPaymentIDSave").val($(this).data("paymentID"));
-			$("#paymentPrice").val($(this).closest("tr").find('td:eq(0)').text());
-			$("#cardType").val($(this).closest("tr").find('td:eq(1)').text());
-			$("#paymentName").val($(this).closest("tr").find('td:eq(2)').text());
-			$("#paymentCardNo").val($(this).closest("tr").find('td:eq(3)').text());
-			$("#paymentExDate").val($(this).closest("tr").find('td:eq(4)').text());
-			$("#paymentCvc").val($(this).closest("tr").find('td:eq(5)').text());	
+			$("#paymentID").val($(this).closest("tr").find('td:eq(0)').text());
+			$("#paymentPrice").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#cardType").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#paymentName").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#paymentCardNo").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#startDate").val($(this).closest("tr").find('td:eq(5)').text());
+			$("#paymentCvc").val($(this).closest("tr").find('td:eq(6)').text());	
 		});
 
 
@@ -152,7 +153,7 @@ function validateItemForm() {
 	}
 	
 	// Card Expire Date
-	if ($("#paymentExDate").val().trim() == "") {
+	if ($("#startDate").val().trim() == "") {
 		return "Please insert Card Expire Date.";
 	}
 	

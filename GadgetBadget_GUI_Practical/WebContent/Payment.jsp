@@ -13,6 +13,27 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="Components/jquery-3.5.0.min.js"></script>
 		<script src="Components/Payment.js"></script>
+		   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+     <script type="text/javascript">
+        $(function() {
+            $('.date-picker').datepicker( {
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'MM yy',
+            onClose: function(dateText, inst) { 
+                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            }
+            });
+        });
+    </script>
+    <style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+    </style>
 
 	</head>
 	
@@ -33,6 +54,7 @@
 						
 						<div class="form-outline mb-4">
 						    <label class="form-label" for="form6Example3" class="col-sm-2 col-form-label col-form-label-sm">Product Price:</label>
+						    <input type="hidden" id="paymentID" name="paymentID">
 						    <input type="text" id="paymentPrice" class="form-control" name="paymentPrice">						    
 						</div>
 						
@@ -61,13 +83,13 @@
 						    <div class="col">
 						      <div class="form-outline">
 						        <label class="form-label" for="form6Example1" class="col-sm-2 col-form-label col-form-label-sm">Expire Date:</label>
-						        <input type="text" id="paymentExDate" class="form-control" name="paymentExDate">						        
+						        <input type="" id="startDate"  class="date-picker" name="startDate" placeholder="MM/YY">						        
 						      </div>
 						    </div>
 						    <div class="col">
 						      <div class="form-outline">
 								<label class="form-label" for="form6Example2" class="col-sm-2 col-form-label col-form-label-sm">CVC:</label>
-						        <input type="text" id="paymentCvc" class="form-control" name="paymentCvc" aria-describedby="passwordHelpInline">
+						        <input type="text" id="paymentCvc" class="form-control" name="paymentCvc" aria-describedby="passwordHelpInline" placeholder="Must be 3 digit number.">
 						        <small id="passwordHelpInline" class="text-muted">
       								Must be 3 digit number.
     							</small>
@@ -76,12 +98,14 @@
 						  </div>						
 						<br> 
 						
+						<div id="alertSuccess" class="alert alert-success"></div>
+						<div id="alertError" class="alert alert-danger"></div>	
+						
 						<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary btn-lg btn-block"> 
-						<input type="hidden" id="hidPaymentIDSave" name="hidPaymentIDSave" value="">
+						
 					</form>
 				
-					<div id="alertSuccess" class="alert alert-success"></div>
-					<div id="alertError" class="alert alert-danger"></div>			
+							
 			</fieldset>
 			
 			<br> 

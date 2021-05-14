@@ -37,7 +37,7 @@ public class PaymentAPI extends HttpServlet {
 				request.getParameter("cardType"),
 				request.getParameter("paymentName"), 
 				request.getParameter("paymentCardNo"), 
-				request.getParameter("paymentExDate"),
+				request.getParameter("startDate"),
 				request.getParameter("paymentCvc"));
 		
 
@@ -55,7 +55,7 @@ public class PaymentAPI extends HttpServlet {
 				paras.get("cardType").toString(), 
 				paras.get("paymentName").toString(), 
 				paras.get("paymentCardNo").toString(),
-				paras.get("paymentExDate").toString(),
+				paras.get("startDate").toString(),
 				paras.get("paymentCvc").toString());
 				
 

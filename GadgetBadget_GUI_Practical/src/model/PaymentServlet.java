@@ -27,17 +27,17 @@ public String insertPayment(String price, String cardType, String name, String c
  if (con == null)
  {return "Error while connecting to the database for inserting."; }
  // create a prepared statement
- String query = " insert into payments(`paymentID`,`paymentPrice`, `cardType`, `paymentName`,`paymentCardNo`,`paymentExDate`,`paymentCvc`)"
- + " values (?, ?, ?, ?, ?, ?, ?)";
+ String query = " insert into payments(`paymentPrice`, `cardType`, `paymentName`,`paymentCardNo`,`paymentExDate`,`paymentCvc`)"
+ + " values (?, ?, ?, ?, ?, ?)";
  PreparedStatement preparedStmt = con.prepareStatement(query);
  // binding values
- preparedStmt.setInt(1, 0);
- preparedStmt.setDouble(2, Double.parseDouble(price));
- preparedStmt.setString(3, cardType);
- preparedStmt.setString(4, name);
- preparedStmt.setString(5, cardno);
- preparedStmt.setString(6, exdate);
- preparedStmt.setString(7, cvc);
+
+ preparedStmt.setDouble(1, Double.parseDouble(price));
+ preparedStmt.setString(2, cardType);
+ preparedStmt.setString(3, name);
+ preparedStmt.setString(4, cardno);
+ preparedStmt.setString(5, exdate);
+ preparedStmt.setString(6, cvc);
 // execute the statement
  preparedStmt.execute();
  con.close();
@@ -62,7 +62,7 @@ public String readPayments()
  if (con == null)
  {return "Error while connecting to the database for reading."; }
  // Prepare the html table to be displayed
- output = "<table border='1'><tr><th>Price</th><th>Card Type</th><th>Name on Card</th><th>Card Number</th>" +
+ output = "<table border='1'><tr><th>Payment ID</th><th>Price</th><th>Card Type</th><th>Name on Card</th><th>Card Number</th>" +
  "<th>Expire Date</th>" +
  "<th>CVC</th>" +
  "<th>Update</th><th>Remove</th></tr>";
@@ -81,7 +81,8 @@ public String readPayments()
  String paymentExDate = rs.getString("paymentExDate");
  String paymentCvc = rs.getString("paymentCvc");
  // Add into the html table
- output += "<tr><td>" + paymentPrice + "</td>";
+ output += "<tr class='text-center'><td>" + paymentID + "</td>";
+ output += "<td>" + paymentPrice + "</td>";
  output += "<td>" + cardType + "</td>";
  output += "<td>" + paymentName + "</td>";
  output += "<td>" + paymentCardNo + "</td>";
@@ -89,9 +90,9 @@ public String readPayments()
  output += "<td>" + paymentCvc + "</td>";
  // buttons
  output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
-		 + "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='" 
-		 + paymentID + "'>" + "</td></tr>";
- }
+		 + "<td><button class='btnRemove btn btn-danger' name='btnRemove' id ='btnRemove' value='"+ paymentID +"' >Remove</button></td></tr>";
+} 
+
  con.close();
  // Complete the html table
  output += "</table>";
@@ -122,10 +123,12 @@ public String updatePayment(String ID, String price, String cardType, String nam
 	 preparedStmt.setString(5, exdate);
 	 preparedStmt.setString(6, cvc);
 	 preparedStmt.setInt(7, Integer.parseInt(ID));
+
 	 // execute the statement
 	 preparedStmt.execute();
 	 con.close();
-	 String newPayment = readPayments(); output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}"; 
+	 String newPayment = readPayments();
+	 output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}"; 
 	 } 
 	 catch (Exception e) 
 	 { 
